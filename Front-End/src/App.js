@@ -10,11 +10,12 @@ function App() {
     people,
     planets,
     starships,
-    isLoading,
+    //
     getPeople,
     getPlanets,
     getStarships,
     getPerson,
+    //
     getAllPeople,
     getAllPlanets,
     getAllStarships,
@@ -42,7 +43,7 @@ function App() {
           </h1>
         </div>
       </div>
-      {/* Selections */}
+      {/* Categories */}
       <div className="flex gap-14 text-xl mt-5">
         <button
           className={`hover:bg-green-200 active:bg-green-300 p-3 rounded-xl ${
@@ -100,21 +101,22 @@ function App() {
             ref={nameSearchRef}
           ></input>
         </div>
-
         <div className="grid grid-cols-5 gap-5 w-full">
-          {isLoading ? LoadingBar : people.map((person) => (
-            <div
-              key={`${person.name} ${person.mass}`}
-              className="flex flex-col p-5 shadow-md hover:shadow-xl border-2 border-gray-200 rounded-xl"
-            >
-              <h2 className="text-lg font-semibold">{person.name}</h2>
-              <h5 className="text-md">Gender: {person.gender}</h5>
-              <h5 className="text-md">Height: {person.height}cm</h5>
-              <h5 className="text-md">Weight: {person.mass}kg</h5>
-              <h5 className="text-md">Hair Color: {person.hair_color}</h5>
-              <h5 className="text-md">Eye Color: {person.eye_color}</h5>
-            </div>
-          ))}
+          {people.length < 1
+            ? LoadingBar
+            : people.map((person) => (
+                <div
+                  key={`${person.name} ${person.mass}`}
+                  className="flex flex-col p-5 shadow-md hover:shadow-xl border-2 border-gray-200 rounded-xl"
+                >
+                  <h2 className="text-lg font-semibold">{person.name}</h2>
+                  <h5 className="text-md">Gender: {person.gender}</h5>
+                  <h5 className="text-md">Height: {person.height}cm</h5>
+                  <h5 className="text-md">Weight: {person.mass}kg</h5>
+                  <h5 className="text-md">Hair Color: {person.hair_color}</h5>
+                  <h5 className="text-md">Eye Color: {person.eye_color}</h5>
+                </div>
+              ))}
         </div>
         <button
           className="flex justify-center items-center border-2 w-36 h-14 text-lg border-gray-200 hover:bg-gray-100 active:bg-gray-200 rounded-xl"
@@ -125,26 +127,28 @@ function App() {
       </div>
       {/* Planets */}
       <div
-        className={`flex flex-col gap-10 mt-8 items-center ${
+        className={`flex flex-col gap-10 mt-8 items-center w-7/12 ${
           contentType === "planets" ? "block" : "hidden"
         }`}
       >
         <h1 className="text-4xl font-bold w-full text-center">
           List of Planets
         </h1>
-        <div className="grid grid-cols-5 gap-5 w-8/12">
-          {planets.map((planet) => (
-            <div
-              key={planet.name}
-              className="flex flex-col p-5 shadow-md hover:shadow-xl border-2 border-gray-200 rounded-xl"
-            >
-              <h2 className="text-lg font-semibold">{planet.name}</h2>
-              <h5 className="text-md">Population: {planet.population}</h5>
-              <h5 className="text-md">Terrain: {planet.terrain}</h5>
-              <h5 className="text-md">Diameter: {planet.diameter}</h5>
-              <h5 className="text-md">Gravity: {planet.gravity}</h5>
-            </div>
-          ))}
+        <div className="grid grid-cols-5 gap-5 w-full">
+          {planets.length < 1
+            ? LoadingBar
+            : planets.map((planet) => (
+                <div
+                  key={planet.name}
+                  className="flex flex-col p-5 shadow-md hover:shadow-xl border-2 border-gray-200 rounded-xl"
+                >
+                  <h2 className="text-lg font-semibold">{planet.name}</h2>
+                  <h5 className="text-md">Population: {planet.population}</h5>
+                  <h5 className="text-md">Terrain: {planet.terrain}</h5>
+                  <h5 className="text-md">Diameter: {planet.diameter}</h5>
+                  <h5 className="text-md">Gravity: {planet.gravity}</h5>
+                </div>
+              ))}
         </div>
         <button
           className="flex justify-center items-center border-2 w-36 h-14 text-lg border-gray-200 hover:bg-gray-100 active:bg-gray-200 rounded-xl"
@@ -155,27 +159,29 @@ function App() {
       </div>
       {/* Starships */}
       <div
-        className={`flex flex-col gap-10 mt-8 items-center ${
+        className={`flex flex-col gap-10 mt-8 items-center w-7/12 ${
           contentType === "starships" ? "block" : "hidden"
         }`}
       >
         <h1 className="text-4xl font-bold w-full text-center">
           List of Starships
         </h1>
-        <div className="grid grid-cols-5 gap-5 w-8/12">
-          {starships.map((starship) => (
-            <div
-              key={starship.name}
-              className="flex flex-col p-5 shadow-md hover:shadow-xl border-2 border-gray-200 rounded-xl"
-            >
-              <h2 className="text-lg font-semibold">{starship.name}</h2>
-              <h5 className="text-md">Crew: {starship.crew}</h5>
-              <h5 className="text-md">Length: {starship.length}</h5>
-              <h5 className="text-md">Model: {starship.model}</h5>
-              <h5 className="text-md">Passengers: {starship.passengers}</h5>
-              <h5 className="text-md">Class: {starship.starship_class}</h5>
-            </div>
-          ))}
+        <div className="grid grid-cols-5 gap-5 w-full">
+          {starships.length < 1
+            ? LoadingBar
+            : starships.map((starship) => (
+                <div
+                  key={starship.name}
+                  className="flex flex-col p-5 shadow-md hover:shadow-xl border-2 border-gray-200 rounded-xl"
+                >
+                  <h2 className="text-lg font-semibold">{starship.name}</h2>
+                  <h5 className="text-md">Crew: {starship.crew}</h5>
+                  <h5 className="text-md">Length: {starship.length}</h5>
+                  <h5 className="text-md">Model: {starship.model}</h5>
+                  <h5 className="text-md">Passengers: {starship.passengers}</h5>
+                  <h5 className="text-md">Class: {starship.starship_class}</h5>
+                </div>
+              ))}
         </div>
         <button
           className="flex justify-center items-center border-2 w-36 h-14 text-lg border-gray-200 hover:bg-gray-100 active:bg-gray-200 rounded-xl"

@@ -1,32 +1,28 @@
 import { useState, useCallback } from "react";
 
 const useHttp = () => {
-  const BASE_URL = "http://localhost:8080/";
+  const BACKEND_URL = "http://localhost:8080/";
 
   const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [starships, setStarships] = useState([]);
 
   // const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const sendRequest = useCallback(async (urlExt) => {
-    setIsLoading(true);
+  const sendRequest = async (urlExt) => {
     // setError(null);
     try {
-      const response = await fetch(BASE_URL + urlExt);
+      const response = await fetch(BACKEND_URL + urlExt);
 
       if (!response.ok) throw new Error("Something went wrong!");
 
       const data = await response.json();
 
-      setIsLoading(false);
       return data;
     } catch (error) {
+      console.log(error.message);
       // setError(error.message);
-      setIsLoading(false);
     }
-  }, []);
+  };
 
   // 4 Default Queries
   const getPeople = () => {
@@ -51,14 +47,17 @@ const useHttp = () => {
 
   // Extra Queries
   const getAllPeople = () => {
+    setPeople([]);
     sendRequest("allpeople/").then((data) => setPeople(data));
   };
 
-  const getAllPlanets = (url, page = 1, previousResponse = []) => {
+  const getAllPlanets = () => {
+    setPlanets([]);
     sendRequest("allplanets/").then((data) => setPlanets(data));
   };
 
-  const getAllStarships = (url, page = 1, previousResponse = []) => {
+  const getAllStarships = () => {
+    setStarships([]);
     sendRequest("allstarships/").then((data) => setStarships(data));
   };
 
@@ -66,7 +65,6 @@ const useHttp = () => {
     people,
     planets,
     starships,
-    isLoading,
     // error,
     getPeople,
     getPlanets,
